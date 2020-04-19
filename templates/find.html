@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>find</title>
+</head>
+<body>
+
+<form action="{% url 'app:find' %}" method="post">
+    {% csrf_token %}
+    <label for="c_no">查找的车牌：</label><input type="text" name="car_no" id="c_no"/>
+    <input type="submit" value="find">
+</form>
+
+{% if c_no %}
+    车辆：{{ c_no }}<br>
+    在第{{ cws.P_Car_w_no.Car_w_no }}号车位
+    <br>
+    车位在第{{ cws.P_Car_w_no.Car_w_wz }}
+{% endif %}
+
+</body>
+</html>

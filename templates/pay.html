@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>支付</title>
+</head>
+<body>
+<div style="margin: 15% 40%">
+    <h1>谢谢光临</h1>
+    车牌号：{{ car_no }}<br>
+    进入时间：{{ intime }}<br>
+    离开时间：{{outtime}}<br>
+    停车时间：{{ time_hour}}小时{{ alltime }}分钟<br>
+    需要支付：{{ Money }}元
+    <a href="{% url 'inout:pay' %}?money={{ Money }}" >支付</a>
+</div>
+</body>
+</html>

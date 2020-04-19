@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+</head>
+<body>
+
+<div style="margin: 15% 40%">
+    <h2>管理员登录</h2>
+    <form action="{% url 'login:login' %}" method="post">
+        {% csrf_token %}
+        <p>
+            <label for="username">用户名：</label>
+            <input type="text" id="username" name="user_name" placeholder="请输入用户名" autofocus required>
+        </p>
+        <p>
+            <label for="password">密码：</label>
+            <input type="password" id="password" name="pass_word" placeholder="请输入密码" autofocus required>
+        </p>
+        <input type="submit" value="登录">
+    </form>
+    <a href="{% url 'index' %}"><input type="submit" value="返回主页面"></a>
+</div>
+
+{% if info %}
+    <script>
+            window.alert('{{ info }}');
+    </script>
+{% endif %}
+
+
+</body>
+</html>

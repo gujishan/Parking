@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>离开停车场</title>
+</head>
+
+<body>
+<div style="margin: 15% 40%">
+    <form action="{% url 'inout:car_out' %}" method="post">
+
+    {% csrf_token %}
+        <label for="c_no">选择要离开的车辆</label>
+            <select name="car_no" id="c_no" class="form-control">
+            {% for car_no in car_nos %}
+                <option value="{{ car_no.P_Car_no.Car_no }}">{{ car_no.P_Car_no.Car_no }}</option>
+            {% endfor %}
+            </select>
+        <input type="submit" value="离开停车场">
+    </form>
+    <a href="{% url 'index' %}"><input type="submit" value="返回主页面"></a>
+</div>
+
+</body>
+</html>

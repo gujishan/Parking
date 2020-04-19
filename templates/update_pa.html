@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>更改车位信息</title>
+</head>
+<body>
+
+<div style="margin: 15% 40%">
+    <form action="{% url "app:update_parking" no %}" method="post">
+        {% csrf_token %}
+        更改第{{ no }}号车位<br/>
+        <label for="c_w_length">车位长度：</label><input type="text" name="car_w_length" id="c_w_length"/>米<br/>
+        <label for="c_w_wz">车位位置：</label>
+        <select name="car_w_wz" id="c_w_wz">
+            <option value="一区">一区</option>
+            <option value="二区">二区</option>
+            <option value="三区">三区</option>
+        </select>
+        <br/>
+        <input type="submit" value="添加">
+    </form>
+</div>
+
+{% if info %}
+    <script>
+            window.alert('{{ info }}');
+    </script>
+{% endif %}
+
+</body>
+</html>

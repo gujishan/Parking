@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>查找</title>
+</head>
+<body>
+
+输入要查找的车牌：
+<form action="{% url 'app:find_all' %}" method="post">
+    {% csrf_token %}
+<input type="text" name="car_no">
+    <input type="submit" value="查找">
+</form>
+
+
+
+{% if cws %}
+
+<table border="1" cellspacing="0">
+{% csrf_token %}
+    <tr>
+        <th>车辆车牌</th>
+        <th>车位编号</th>
+        <th>车位位置</th>
+        <th>进入时间</th>
+        <th>离开时间</th>
+    </tr>
+    {% for cw in cws %}
+        <tr>
+            <td>{{ cw.P_Car_no.Car_no }}</td>
+            <td>{{ cw.P_Car_w_no.Car_w_no }}</td>
+            <td>{{ cw.P_Car_w_no.Car_w_wz }}</td>
+            <td>{{ cw.In_time }}</td>
+            {% if cw.Out_time %}
+                <td>{{ cw.Out_time }}</td>
+            {% else %}
+                <td>还在停车场</td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+</table>
+{% endif %}
+
+</body>
+</html>

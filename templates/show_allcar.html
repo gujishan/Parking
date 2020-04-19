@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>显示进入停车场的车</title>
+</head>
+<body>
+<div>
+<table border="1" cellspacing="0" >
+    <tr>
+        <th>车牌</th>
+        <th>停车车位信息</th>
+        <th>进入时间</th>
+        <th>离开时间</th>
+        <th>车辆长度</th>
+        <th>车辆颜色</th>
+        <th>车辆状态</th>
+    </tr>
+        {% for car in cars %}
+            <tr>
+            <td>{{ car.P_Car_no.Car_no }}</td>
+            <td>编号：{{ car.P_Car_w_no.Car_w_no }}；位置：{{ car.P_Car_w_no.Car_w_wz }}；长度：{{ car.P_Car_w_no.Car_w_length }}</td>
+            <td>{{ car.In_time }}</td>
+            {% if car.Out_time %}
+            <td>{{ car.Out_time }}</td>
+                {% else %}
+                <td>没离开</td>
+            {% endif %}
+            <td>{{ car.P_Car_no.Car_length }}</td>
+            <td>{{ car.P_Car_no.Car_color }}</td>
+            {% if car.Cat_status %}
+            <td>在停车场</td>
+                {% else %}
+                <td>离开了</td>
+            {% endif %}
+        {% endfor %}
+            </tr>
+</table>
+<a href="{% url 'app:show_incar' %}"><button>显示在停车场的车辆</button></a>
+<a href="{% url 'login:root' %}"><button>返回管理员页面</button></a>
+</div>
+
+</body>
+</html>

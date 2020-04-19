@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>显示车位</title>
+</head>
+<body>
+
+<div style="margin: 15% 40%">
+<table border="1" cellspacing="0">
+    <tr>
+        <th>车位编号</th>
+        <th>车位位置</th>
+        <th>车位长度</th>
+        <th>使用状态</th>
+        <th>删除修改</th>
+    </tr>
+    {% for car_w in car_ws %}
+        <tr>
+            <td>{{ car_w.Car_w_no }}</td>
+            <td>{{ car_w.Car_w_wz }}</td>
+            <td>{{ car_w.Car_w_length }}</td>
+            {% if car_w.Car_w_status%}
+                <td>空闲</td>
+            {% else %}
+                <td>使用中</td>
+            {% endif %}
+            <td>
+                <a href="{% url 'app:re_parking' car_w.Car_w_no  %}">删除</a>
+                <a href="{% url 'app:update_parking' car_w.Car_w_no  %}">更改</a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+<a href="{% url 'login:root' %}"><input type="submit" value="返回管理员页面"></a>
+
+</div>
+
+
+
+
+{% if info %}
+    <script>
+            window.alert('{{ info }}');
+    </script>
+{% endif %}
+
+</body>
+</html>

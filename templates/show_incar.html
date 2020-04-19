@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>显示车辆</title>
+</head>
+<body>
+
+<div>
+
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>车牌</th>
+                <th>停车车位</th>
+                <th>进入时间</th>
+                <th>车辆长度</th>
+                <th>车辆颜色</th>
+            </tr>
+                {% for car in cars %}
+            <tr>
+
+                <td>{{ car.P_Car_no.Car_no }}</td>
+                <td>{{ car.P_Car_w_no.Car_w_no }}</td>
+                <td>{{ car.In_time }}</td>
+                <td>{{ car.P_Car_no.Car_length }}</td>
+                <td>{{ car.P_Car_no.Car_color }}</td>
+                {% endfor %}
+            </tr>
+        </table>
+
+<a href="{% url 'login:root' %}"><input type="submit" value="返回管理员页面"></a>
+</div>
+
+{% if not cars %}
+    <script>
+            window.alert('停车场里没有车');
+    </script>
+{% endif %}
+</body>
+</html>

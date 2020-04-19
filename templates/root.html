@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>管理员登录</title>
+</head>
+<body>
+
+<div style="margin: 15% 40%">
+{% csrf_token %}
+<ul>
+    <li><a href="{% url 'app:add_parking' %}">添加停车位</a></li>
+    <li><a href="{% url 'app:get_parking' %}">查看停车位</a></li>
+    <li><a href="{% url 'app:show_incar' %}">查看停车场车辆</a></li>
+    <li><a href="{% url 'app:show_allcar' %}">查看所有车辆</a></li>
+    <li><a href="{% url 'app:money' %}">查看收费信息</a></li>
+{#    <li><a href="#">通过图查看每天停车情况</a></li>#}
+    <li><a href="{% url 'login:register' %}">增加管理人员</a></li>
+    <li><a href="{% url 'index' %}"><input type="submit" value="返回主页面"></a></li>
+</ul>
+</div>
+
+
+{% if info %}
+    <script>
+            window.alert('{{ info }}');
+    </script>
+{% endif %}
+
+</body>
+</html>
