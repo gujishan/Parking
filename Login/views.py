@@ -21,7 +21,7 @@ def login(request):
             if user.password == password:
                 request.session['login_user_name']=username
                 request.session.set_expiry(0)
-                return redirect(reverse("login:root"))
+                return render(request,'root.html')
             else:
                 info = '请输入正确的密码'
                 return render(request, 'login.html', context=locals())
@@ -40,10 +40,29 @@ def register(request):
             login.name = username
             login.password = password
             login.save()
-            success = "注册成功"
+            success = "添加成功"
             return render(request, 'register.html', context=locals())
     return render(request, 'register.html')
 
 @my_login
 def root(request):
     return render(request, 'root.html')
+
+@my_login
+def ul(request):
+    root=request.session.get("login_user_name")
+    if root=='root':
+        info='root'
+        return render(request,'ul.html',context=locals())
+    else:
+        return render(request,'ul.html')
+
+@my_login
+def welcome(request):
+    username=request.session.get("login_user_name")
+    return render(request,'welcome.html',context=locals())
+
+
+def get_all(request):
+    login=Login.objects.all()
+    return render(request,'all_login.html',context=locals())

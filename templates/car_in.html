@@ -2,47 +2,76 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>进入停车场</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>进入</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-image: linear-gradient(to top, rgba(255,0,0,0), #4169E1	);
+            display: flex;
+            height: 100vh;
+        }
+        #form{
+            margin: auto;
+            /* background-color: blue; */
+            width: 400px;
+            border: 1px solid red;
+            border-radius: 20px;
+        }
+        #form form{
+            padding: 10px;
+        }
+        #form form input,select{
+            width: 200px;
+            height: 30px;
+            margin: 5px;
+            border: none;
+            outline: none;
+            border-radius: 10px;
+
+
+        }
+        #form form .submit{
+            width: 370px;
+            height: 40px;
+            font-size: 15px;
+            margin-top: 10px auto;
+            border: none;
+            border-radius:20px;
+            list-style: none;
+            background-color:#1E90FF;
+        }
+    </style>
 </head>
 <body>
-<div style="margin: 15% 40%">
-    <form action="{% url 'inout:car_in' %}" method="post">
-        {% csrf_token %}
-        <p>
-            <label for="c_no">车牌：</label><input type="text" name="car_no" id="c_no"/>
-        </p>
-        <p>
-            <label for="c_length">车辆长度：</label><input type="text" name="car_length" id="c_length"/>米
-        </p>
-        <p>
-            <label for="c_color">车辆颜色：</label><input type="text" name="car_color" id="c_color"/>
-        </p>
-        <p>
-            <label for="c_type">车辆类型：</label>
+    <div id="form">
+    <h1 style="text-align: center;">进入</h1>
+    <form action="#" method="POST">
+
+        车牌 ：&numsp;&numsp;&numsp;<input type="text" class="txt" name="car_no" id="c_no" placeholder="进入车辆的车牌"/>
+        <br>
+        车辆长度：<input type="text" class="txt" name="car_length" id="c_length" placeholder="进入车辆的长度"/>米
+        <br>
+        车辆颜色：<input type="text" name="car_color" id="c_color" placeholder="进入车辆的颜色"/>
+        <br>
+        车辆类型：
             <select name="car_type" id="c_type">
                 <option value="小">小</option>
                 <option value="中">中</option>
                 <option value="大">大</option>
             </select>
-        </p>
-        <p>
-             <label for="c_w_no">停车车位编号：</label>
+            <br>
+        停车车位编号：
             <select name="car_w_no" id="c_w_no">
-                {% for car_w in car_ws %}
-                    <option value="{{ car_w.Car_w_no }}">{{ car_w.Car_w_no }}号车位：长度：{{ car_w.Car_w_length }}米</option>
-                {% endfor %}
             </select>
-        </p>
-        <p>
-            <input type="submit" value="进入停车场"/>
-        </p>
+            <br>
+            <input class="submit" type="submit" value="进入停车场"/>
+
     </form>
-    <a href="{% url 'index' %}"><input type="submit" value="返回首页"/></a>
-</div>
-{% if info %}
-    <script>
-            window.alert('{{ info }}');
-    </script>
-{% endif %}
+
+    </div>
 </body>
 </html>

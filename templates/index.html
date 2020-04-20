@@ -2,13 +2,129 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>主页</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        #all{
+            width: 100%;
+            height: 100vh ;
+            position: relative;
+        }
+        #head{
+            position: absolute;
+            width: 100%;
+            height: 150px;
+            background-image: url(../static/img/head.png);
+        }
+
+        h1{
+            text-align: center;
+            line-height: 150px;
+            letter-spacing: 20px;
+        }
+
+        #left{
+
+            border-right: 1px solid blue;
+            float: left;
+            width: 40%;
+            height: 100vh;
+        }
+
+        #right{
+            float: left;
+            width: 40%;
+            height: 100vh;
+        }
+
+        #car_w{
+            width: 19%;
+            height: 100px;
+            float: left;
+            margin-top: 150px;
+            border: 1px solid blue;
+            border-radius: 30px;
+        }
+
+        #saom{
+            width: 100px;
+            height: 100px;
+            float: left;
+            margin-top: 150px;
+            border: 1px solid blue;
+            border-radius: 100px;
+        }
+
+        .in{
+            background-color: red;
+            width: 300px;
+            height: 300px;
+            font-size: 20px;
+            border-radius:300px;
+            outline: none;
+
+            position: relative;
+            display:inline-block;
+            margin-top:200px;
+            margin-left: 20%;
+        }
+
+        .out{
+            background-color: blue;
+            width: 300px;
+            height: 300px;
+            font-size: 20px;
+            border-radius:300px;
+            outline: none;
+
+            position: relative;
+            display:inline-block;
+            margin-top:200px;
+            margin-left: 20%;
+        }
+
+        .root{
+            background-color: blue;
+            width: 100px;
+            height: 30px;
+            font-size: 20px;
+            border-radius:300px;
+            outline: none;
+            position:absolute;
+            right:0px;
+            bottom:0px;
+        }
+
+
+    </style>
 </head>
-<body >
-<div style="margin: 15% 40%">
-    <a href='{% url 'inout:car_in' %}'>进入停车场</a>
-    <a href='{% url 'inout:car_out' %}'>离开停车场</a>
-    <a href='{% url 'login:login' %}'>管理员</a>
+<body>
+<div id="all">
+    <div id="head">
+        <h1>欢迎使用停车场</h1>
+        <a href="{% url 'login:root' %}"><input class="root" type="button" value="管理员"></a>
+    </div>
+
+    <div id="left">
+        <a href="{% url 'inout:car_in' %}"><input class="in" type="button" value="进入停车场"></a>
+    </div>
+
+    <div id="right">
+        <a href="{% url 'inout:car_out' %}"><input class="out" type="button" value="离开停车场"></a>
+    </div>
+
+    <div id="car_w">
+        <h2 style="margin-left: 30px ; margin-top: 26px">还有{{cw.count}}个车位</h2>
+    </div>
+
+    <div id="saom">
+        <h2>saoma</h2>
+    </div>
 </div>
 </body>
 </html>

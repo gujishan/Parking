@@ -19,7 +19,8 @@ def hello(request):
 
 
 def index(request):
-    return render(request, 'index.html')
+    cw=Car_w.objects.filter(Car_w_status=True)
+    return render(request, 'index.html',context=locals())
 
 
 def car_in(request):

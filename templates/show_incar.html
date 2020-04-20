@@ -2,39 +2,55 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>显示车辆</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-image: linear-gradient(to top, rgba(255,0,0,0), #4169E1	);
+            display: flex;
+            height: 100vh;
+        }
+        #table{
+            margin-top: 20px;
+            border: 1px solid red;
+            border-radius: 20px;
+        }
+        table{
+            margin-top: 10px;
+            margin-left: 30px;
+            margin-right: 30px;
+            margin-bottom: 10px;
+        }
+    </style>
+    <title>Document</title>
 </head>
 <body>
 
-<div>
+<div id="table">
+    <table border="1" cellspacing="0">
+        <tr>
+            <th>车牌</th>
+            <th>停车车位</th>
+            <th>进入时间</th>
+            <th>车辆长度</th>
+            <th>车辆颜色</th>
+        </tr>
+            {% for car in cars %}
+        <tr>
 
-        <table border="1" cellspacing="0">
-            <tr>
-                <th>车牌</th>
-                <th>停车车位</th>
-                <th>进入时间</th>
-                <th>车辆长度</th>
-                <th>车辆颜色</th>
-            </tr>
-                {% for car in cars %}
-            <tr>
-
-                <td>{{ car.P_Car_no.Car_no }}</td>
-                <td>{{ car.P_Car_w_no.Car_w_no }}</td>
-                <td>{{ car.In_time }}</td>
-                <td>{{ car.P_Car_no.Car_length }}</td>
-                <td>{{ car.P_Car_no.Car_color }}</td>
-                {% endfor %}
-            </tr>
-        </table>
-
-<a href="{% url 'login:root' %}"><input type="submit" value="返回管理员页面"></a>
+            <td>{{ car.P_Car_no.Car_no }}</td>
+            <td>{{ car.P_Car_w_no.Car_w_no }}</td>
+            <td>{{ car.In_time }}</td>
+            <td>{{ car.P_Car_no.Car_length }}</td>
+            <td>{{ car.P_Car_no.Car_color }}</td>
+            {% endfor %}
+        </tr>
+    </table>
 </div>
 
-{% if not cars %}
-    <script>
-            window.alert('停车场里没有车');
-    </script>
-{% endif %}
+
 </body>
 </html>

@@ -2,22 +2,71 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-image: linear-gradient(to top, rgba(255,0,0,0), #4169E1	);
+            display: flex;
+            height: 100vh;
+        }
+        #find{
+            margin: auto;
+            width: 400px;
+            border: 1px solid red;
+            border-radius: 20px
+        }
+        #find form{
+            padding: 10px;
+        }
+        #find form input,select{
+            width: 200px;
+            height: 30px;
+            margin: 5px;
+            border: none;
+            outline: none;
+            border-radius: 10px;
+
+
+        }
+        #find form .submit{
+            width: 100px;
+            height: 36px;
+            font-size: 15px;
+            margin-top: 10px auto;
+            margin-left: 130px;
+            border: none;
+            border-radius:20px;
+            list-style: none;
+            background-color:#1E90FF;
+        }
+        </style>
     <title>find</title>
 </head>
 <body>
+    <div id="find">
+        <form action="{% url 'app:find' %}" method="post">
+             {% csrf_token %}
+            <label for="c_no">查找的车牌：</label><input type="text" name="car_no" id="c_no"/>
+            <input class="submit" type="submit" value="查找">
+        </form>
 
-<form action="{% url 'app:find' %}" method="post">
-    {% csrf_token %}
-    <label for="c_no">查找的车牌：</label><input type="text" name="car_no" id="c_no"/>
-    <input type="submit" value="find">
-</form>
+        {% if c_no %}
+            {{ c_no }}
+            {{ cws.P_Car_w_no.Car_w_no }}
+        {% endif %}
+    </div>
 
-{% if c_no %}
-    车辆：{{ c_no }}<br>
-    在第{{ cws.P_Car_w_no.Car_w_no }}号车位
-    <br>
-    车位在第{{ cws.P_Car_w_no.Car_w_wz }}
-{% endif %}
+    {% if c_no %}
+        车辆：{{ c_no }}<br>
+        在第{{ cws.P_Car_w_no.Car_w_no }}号车位
+        <br>
+        车位在第{{ cws.P_Car_w_no.Car_w_wz }}
+    {% endif %}
 
 </body>
 </html>
+

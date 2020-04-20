@@ -1,8 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <style>
         *{
             margin: 0;
@@ -34,31 +35,13 @@
 <div id="form">
     <table border="1" cellspacing="0">
         <tr>
-            <th>车位编号</th>
-            <th>车位位置</th>
-            <th>车位长度</th>
             <th>使用状态</th>
             <th>删除修改</th>
         </tr>
-        {% for car_w in car_ws %}
-            <tr>
-                <td>{{ car_w.Car_w_no }}</td>
-                <td>{{ car_w.Car_w_wz }}</td>
-                <td>{{ car_w.Car_w_length }}</td>
-                {% if car_w.Car_w_status%}
-                    <td>空闲</td>
-                {% else %}
-                    <td>使用中</td>
-                {% endif %}
-                <td>
-                    <a href="{% url 'app:re_parking' car_w.Car_w_no  %}">删除</a>
-                    <a href="{% url 'app:update_parking' car_w.Car_w_no  %}">更改</a>
-                </td>
-            </tr>
+
         {% endfor %}
     </table>
 </div>
-
 
 
 </body>

@@ -2,45 +2,85 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>查找</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-image: linear-gradient(to top, rgba(255,0,0,0), #4169E1	);
+            display: flex;
+            height: 100vh;
+        }
+        #find{
+            margin: auto;
+            width: 400px;
+            border: 1px solid red;
+            border-radius: 20px
+        }
+        #find form{
+            padding: 10px;
+        }
+        #find form input,select{
+            width: 200px;
+            height: 30px;
+            margin: 5px;
+            border: none;
+            outline: none;
+            border-radius: 10px;
+
+
+        }
+        #find form .submit{
+            width: 100px;
+            height: 36px;
+            font-size: 15px;
+            margin-top: 10px auto;
+            margin-left: 130px;
+            border: none;
+            border-radius:20px;
+            list-style: none;
+            background-color:#1E90FF;
+        }
+        </style>
+    <title>find</title>
 </head>
 <body>
-
-输入要查找的车牌：
-<form action="{% url 'app:find_all' %}" method="post">
-    {% csrf_token %}
-<input type="text" name="car_no">
-    <input type="submit" value="查找">
-</form>
-
-
-
-{% if cws %}
-
-<table border="1" cellspacing="0">
-{% csrf_token %}
-    <tr>
-        <th>车辆车牌</th>
-        <th>车位编号</th>
-        <th>车位位置</th>
-        <th>进入时间</th>
-        <th>离开时间</th>
-    </tr>
-    {% for cw in cws %}
-        <tr>
-            <td>{{ cw.P_Car_no.Car_no }}</td>
-            <td>{{ cw.P_Car_w_no.Car_w_no }}</td>
-            <td>{{ cw.P_Car_w_no.Car_w_wz }}</td>
-            <td>{{ cw.In_time }}</td>
-            {% if cw.Out_time %}
-                <td>{{ cw.Out_time }}</td>
-            {% else %}
-                <td>还在停车场</td>
-            {% endif %}
-        </tr>
-    {% endfor %}
-</table>
-{% endif %}
+    <div id="find">
+        <form action="{% url 'app:find_all' %}" method="post">
+            {% csrf_token %}
+            <label for="c_no">查找的车牌：</label><input type="text" name="car_no" id="c_no"/>
+            <input class="submit" type="submit" value="查找">
+        </form>
+    {% if cws %}
+        <table border="1" cellspacing="0">
+        {% csrf_token %}
+            <tr>
+                <th>车辆车牌</th>
+                <th>车位编号</th>
+                <th>车位位置</th>
+                <th>进入时间</th>
+                <th>离开时间</th>
+            </tr>
+            {% for cw in cws %}
+                <tr>
+                    <td>{{ cw.P_Car_no.Car_no }}</td>
+                    <td>{{ cw.P_Car_w_no.Car_w_no }}</td>
+                    <td>{{ cw.P_Car_w_no.Car_w_wz }}</td>
+                    <td>{{ cw.In_time }}</td>
+                    {% if cw.Out_time %}
+                        <td>{{ cw.Out_time }}</td>
+                    {% else %}
+                        <td>还在停车场</td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
 
 </body>
 </html>
+
+
+

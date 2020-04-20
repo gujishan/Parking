@@ -2,25 +2,66 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>登录</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-image: linear-gradient(to top, rgba(255,0,0,0), #4169E1	);
+            display: flex;
+            height: 100vh;
+        }
+        #form{
+            margin: auto;
+            /* background-color: blue; */
+            width: 350px;
+            border: 1px solid red;
+            border-radius: 20px;
+        }
+        #form form{
+            padding: 20px;
+        }
+        #form form input,select{
+            width: 200px;
+            height: 30px;
+            margin: 10px;
+            border: none;
+            outline: none;
+            border-radius: 10px;
+        }
+        #form form .submit{
+            margin-left: 60px;
+        }
+        .submit{
+            width: 200px;
+            height: 30px;
+            border: none;
+            outline: none;
+            border-radius: 10px;
+            margin-left: 80px;
+            background-color: #1E90FF;
+            margin-bottom: 15px;
+        }
+    </style>
 </head>
 <body>
 
-<div style="margin: 15% 40%">
-    <h2>管理员登录</h2>
+<div id="form">
+    <h1 style="text-align: center;">管理员登录</h1>
     <form action="{% url 'login:login' %}" method="post">
         {% csrf_token %}
-        <p>
-            <label for="username">用户名：</label>
-            <input type="text" id="username" name="user_name" placeholder="请输入用户名" autofocus required>
-        </p>
-        <p>
-            <label for="password">密码：</label>
+            用户名：<input type="text" id="username" name="user_name" placeholder="请输入用户名" autofocus required>
+            <br>
+            密码：&numsp;
             <input type="password" id="password" name="pass_word" placeholder="请输入密码" autofocus required>
-        </p>
-        <input type="submit" value="登录">
+            <br>
+            <input class="submit" type="submit" value="登录">
     </form>
-    <a href="{% url 'index' %}"><input type="submit" value="返回主页面"></a>
+    <a href="{% url 'index' %}"><input class="submit" type="submit" value="返回主页面"></a>
+
 </div>
 
 {% if info %}
@@ -28,7 +69,6 @@
             window.alert('{{ info }}');
     </script>
 {% endif %}
-
 
 </body>
 </html>

@@ -14,6 +14,6 @@ urlpatterns = [
     url(r'tu/', views.tu, name='tu'),
     url(r'find/', views.find, name='find'),
     url(r'findall', views.find_all,name='find_all'),
-    url(r'tumoney', views.tu_find,name='tu_find'),
+    url(r'tumoney', views.tu_money,name='tu_money'),
     # url(r'test2/', views.test2),
 ]

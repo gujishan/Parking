@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style>
+        body{
+            overflow-y: hidden;
+            overflow-x: hidden;
+        }
+        #car_w{
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+        #car,#money,#root{
+            margin-top: 90px;
+            margin-left: 30px;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="dropdown" id="car_w">
+        <button type="button" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+            车位管理
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+            <li role="presentation">
+                <a role="menuitem" tabindex="-1" href="{% url 'app:add_parking' %}" target="left">添加停车位</a>
+            </li>
+            <li role="presentation">
+                <a role="menuitem" tabindex="-1" href="{% url 'app:get_parking' %}" target="left">查看/删除/更改停车位</a>
+            </li>
+        </ul>
+    </div>
+
+
+
+    <div class="dropdown" id="car">
+        <button type="button" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+            车辆管理
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+            <li role="presentation">
+                <a role="menuitem" tabindex="-1" href="{% url 'app:show_allcar' %}" target="left">所有停车记录</a>
+            </li>
+            <li role="presentation">
+                <a role="menuitem" tabindex="-1" href="{% url 'app:show_incar' %}" target="left">停车场内车辆</a>
+            </li>
+            <li role="presentation">
+                <a role="menuitem" tabindex="-1" href="{% url 'app:find_all' %}" target="left">查找车辆</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="dropdown" id="money">
+        <button type="button" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+            收入管理
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+            <li role="presentation">
+                <a role="menuitem" tabindex="-1" href="{% url 'app:money' %}" target="left">每笔收入（图表）</a>
+            </li>
+            <li role="presentation">
+                <a role="menuitem" tabindex="-1" href="{% url 'app:tu_money' %}" target="left">每天收入（折线图）</a>
+            </li>
+        </ul>
+    </div>
+{% if info %}
+
+    <div class="dropdown" id="root">
+        <button type="button" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+            增删管理员
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+            <li role="presentation">
+                <a role="menuitem" tabindex="-1" href="{% url 'login:register' %}" target="left">增加管理员</a>
+            </li>
+            <li role="presentation">
+                <a role="menuitem" tabindex="-1" href="#" target="left">删除管理员</a>
+            </li>
+        </ul>
+    </div>
+{% endif %}
+</body>
+</html>

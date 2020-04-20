@@ -38,16 +38,36 @@ def zl_data(arr):
     return zl
 # 分解年月日
 def get_year(arr):
-    year=arr.split('-',3)[0]
+    year=arr.split('-',2)[0]
     return year
 
 def get_month(arr):
-    month=arr.split('-',3)[1]
+    month=arr.split('-',2)[1]
     return month
 
 def get_day(arr):
-    day=arr.split('-',3)[2]
+    day=arr.split('-',2)[2]
     return day
+
+# 画图
+def draw(x_data,y_data,title,x_lable,y_lable):
+    plt.title(title)
+    plt.xlabel(x_lable)
+    plt.ylabel(y_lable)
+    ax = plt.gca()
+    ax.spines['top'].set_color('none')
+    ax.spines['right'].set_color('none')
+
+    plt.plot(x_data, y_data, color='red', linewidth=2.0, linestyle='--')
+    for a, b in zip(x_data, y_data):
+        plt.text(a, b, b, ha='center', va='bottom', fontsize=12)
+
+    sio = BytesIO()
+    plt.savefig(sio, format='png')
+    data = base64.encodebytes(sio.getvalue()).decode()
+    plt.close()
+    return data
+
 
 # 添加车位
 @my_login
@@ -130,6 +150,7 @@ def money(request):
         all_money = all_money + float(parking.P_Money)
     return render(request, 'show_money.html', context=locals())
 
+
 def tu(request):
     dates=[]
     x_data=[]
@@ -145,31 +166,26 @@ def tu(request):
         y_data.append(all[i])
     print(all)
     print(x_data,y_data)
-    plt.title('car_num')
-    plt.xlabel('date')
-    plt.ylabel('num')
-    plt.plot(x_data, y_data, color='red', linewidth=2.0, linestyle='--')
 
-    sio = BytesIO()
-    plt.savefig(sio, format='png')
-    data = base64.encodebytes(sio.getvalue()).decode()
-    plt.close()
+    data=draw(x_data=x_data,y_data=y_data,title='Number of vehicles per day',x_lable='date',y_lable='number of cars')
 
-    return render(request,'tu.html',context=locals())
+    return render(request, 'tu.html', context=locals())
 
-def tu_find(request):
+@my_login
+def tu_money(request):
     datas=[]
     moneyss=[]
-    parks=Parking.objects.all()
+    parks=Parking.objects.filter(Cat_status=False)
     for park in parks:
         data=park.Out_time
         data=str(data).split(" ",1)[0]
         datas.append(data)
     zl=zl_data(datas)
     zl.sort()
+    print(zl)
     for i in zl:
         mons = 0
-        print(get_year(i),get_month(i),get_day(i))
+        print(i)
         moneys=parks.filter(Out_time__year=get_year(i),Out_time__month=get_month(i),Out_time__day=get_day(i))
         for money in moneys:
             mon=money.P_Money
@@ -178,24 +194,12 @@ def tu_find(request):
         moneyss.append(mons)
     print(zl)
     print(moneyss)
-
     x_data=zl
     y_data=moneyss
-    plt.title('shouru')
-    plt.xlabel('date')
-    plt.ylabel('money')
-    plt.plot(x_data, y_data, label='shouru',color='red', linewidth=2.0, linestyle='--')
 
-    for a,b in zip(x_data,y_data):
-        plt.text(a,b,b,ha='center',va='bottom',fontsize=15)
+    data=draw(x_data=x_data,y_data=y_data,title='The daily income',x_lable='date',y_lable='income')
 
-    sio = BytesIO()
-    plt.savefig(sio, format='png')
-    data = base64.encodebytes(sio.getvalue()).decode()
-    plt.close()
-
-    return render(request,'tu_money.html',context=locals())
-
+    return render(request,'tu.html',context=locals())
 
 
 def find(request):
@@ -208,13 +212,11 @@ def find(request):
 
         return render(request, 'find.html', context=locals())
 
-
+@my_login
 def find_all(request):
     if request.method=="GET":
-        return render(request,'find_all.html')
+        return render(request, 'find_all.html')
     elif request.method=="POST":
         c_no = request.POST.get('car_no')
         cws=Parking.objects.filter(P_Car_no=c_no)
-        return render(request,'find_all.html',context=locals())
-
-
+        return render(request, 'find_all.html', context=locals())
